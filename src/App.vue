@@ -4,14 +4,18 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
     </div>
-    <router-view/>
+    <router-view />
+    <p>{{}}</p>
   </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
-  
-}
+  computed: {
+    ...mapState(["usuarios"]),
+  },
+};
 </script>
 
 <style lang="scss">
