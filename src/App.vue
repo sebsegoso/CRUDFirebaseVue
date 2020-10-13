@@ -10,10 +10,19 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 export default {
   computed: {
     ...mapState(["usuarios"]),
+  },
+  methods: {
+    ...mapActions(['llamadoApi']),
+    callToApi(){
+      this.llamadoApi()
+    }
+  },
+  mounted() {
+    this.callToApi()
   },
 };
 </script>

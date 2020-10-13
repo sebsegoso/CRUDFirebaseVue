@@ -11,20 +11,11 @@ export default new Vuex.Store({
   mutations: {
   },
   actions: {
-    read(state) {
-      firebase
-        .firestore()
-        .collection("usuarios")
-        .onSnapshot(snapshot => {
-          state.usuarios = []
-          snapshot.forEach(doc => {
-            console.log(doc.id + doc.data());
-            state.usuarios.push({
-              id: doc.id,
-              data: doc.data()
-            })
-          })
-        });
+    llamadoApi(state) {
+      fetch('https://us-central1-demosso-1a57c.cloudfunctions.net/usuarios/usuarios')
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch(error => console.log(`Error en el llamado : ${error}`))
     }
   },
   modules: {
