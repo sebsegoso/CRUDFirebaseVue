@@ -1,51 +1,26 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view />
-    <p>{{}}</p>
-  </div>
+  <v-app>
+    <v-main>
+      <TablaUsuarios />
+      <AgregarUsuario />
+    </v-main>
+  </v-app>
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import AgregarUsuario from "./components/AgregarUsuario";
+import TablaUsuarios from "./components/TablaUsuarios";
+
 export default {
-  computed: {
-    ...mapState(["usuarios"]),
+  name: "App",
+
+  components: {
+    AgregarUsuario,
+    TablaUsuarios,
   },
-  methods: {
-    ...mapActions(['llamadoApi']),
-    callToApi(){
-      this.llamadoApi()
-    }
-  },
-  mounted() {
-    this.callToApi()
-  },
+
+  data: () => ({
+    //
+  }),
 };
 </script>
-
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
-</style>
