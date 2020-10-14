@@ -1,21 +1,41 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import firebase from 'firebase'
+import axios from 'axios'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    usuarios: []
+    usuario: {
+      name: '',
+      lastname: '',
+      email: '',
+      id: ''
+    },
+    usuarios: [],
+    edit: true,
+    loading: false
   },
   mutations: {
+    OBTENER_USUARIOS(state, data) {
+      state.usuarios = data
+      state.loading = false;
+    },
+    CARGAR_TABLA(state) {
+      state.loading = true;
+    }
   },
   actions: {
-    llamadoApi(state) {
-      fetch('https://us-central1-demosso-1a57c.cloudfunctions.net/usuarios/usuarios')
-      .then(response => response.json())
-      .then(data => console.log(data))
-      .catch(error => console.log(`Error en el llamado : ${error}`))
+    obtenerUsuarios(context) {
+      context.commit('CARGAR_TABLA');
+      axios
+        .get('https://us-central1-demosso-1a57c.cloudfunctions.net/usuarios/usuarios',
+          { headers: { 'Content-type': 'text/plain' } }
+        )
+        .then(res => {
+          let data = res.data;
+          context.commit('OBTENER_USUARIOS', data)
+        })
     }
   },
   modules: {
