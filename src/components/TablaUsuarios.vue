@@ -16,7 +16,7 @@
             <td>{{ usuario.data.lastname }}</td>
             <td>{{ usuario.data.email }}</td>
             <td>
-              <v-btn class="mx-2" fab dark small color="cyan" @click="editar()">
+              <v-btn class="mx-2" fab dark small color="cyan" @click="editar(usuario.id)">
                 <v-icon dark> mdi-pencil </v-icon>
               </v-btn>
               <v-btn
@@ -52,6 +52,10 @@ export default {
   methods: {
     borrar(id){
       this.$store.dispatch('eliminarUsuario' , id)
+    },
+    editar(id){
+      
+      alert(id)
     }
   },
 };

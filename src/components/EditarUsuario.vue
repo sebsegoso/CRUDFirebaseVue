@@ -1,7 +1,7 @@
 <template>
   <v-container>
-    <v-app-bar app color="#EEEEEE" light prominent class="py-5">
-      <p>Agregar usuario:</p>
+    <v-app-bar app color="cyan" light prominent class="py-5">
+      <p>Editar usuario:</p>
       <v-text-field
         v-model="newUser.name"
         :rules="[rules.required]"
@@ -51,9 +51,6 @@ export default {
   methods: {
     agregarUsuario() {
       this.$store.dispatch("agregarUsuario", this.newUser);
-      this.newUser.name = "";
-      this.newUser.lastname = "";
-      this.newUser.email = "";
     },
   },
   computed: {

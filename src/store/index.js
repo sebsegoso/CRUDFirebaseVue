@@ -13,7 +13,7 @@ export default new Vuex.Store({
       id: ''
     },
     usuarios: [],
-    edit: true,
+    edit: false,
     rules: {
       required: (value) => !!value || "Campo requerido",
       email: (value) => {
@@ -55,8 +55,11 @@ export default new Vuex.Store({
         .collection('usuarios')
         .doc(id)
         .delete()
-    }
+    },
   },
-  modules: {
+  getters: {
+    edit (state){
+      return state.edit
+    }
   }
 })
