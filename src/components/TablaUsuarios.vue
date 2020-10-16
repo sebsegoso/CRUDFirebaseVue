@@ -20,11 +20,17 @@
               <v-btn class="mx-2" fab dark small color="cyan" @click="editar()">
                 <v-icon dark> mdi-pencil </v-icon>
               </v-btn>
-              <v-btn class="mx-2" fab dark small color="red" @click="borrar(usuario.id)">
+              <v-btn
+                class="mx-2"
+                fab
+                dark
+                small
+                color="red"
+                @click="borrar(usuario.id)"
+              >
                 <v-icon dark> mdi-delete </v-icon>
               </v-btn>
             </td>
-            
           </tr>
         </tbody>
       </template>
@@ -41,20 +47,12 @@ export default {
   data() {
     return {};
   },
-  mounted() {
-    this.cargarTabla();
-  },
   computed: {
-    ...mapState(["usuarios" , 'loading']),
+    ...mapState(["usuarios", "loading"]),
   },
-  methods: {
-    cargarTabla() {
-      console.log('a')
-    },
-  },
+  methods: {},
 };
 </script>
 
 <style>
-
 </style>

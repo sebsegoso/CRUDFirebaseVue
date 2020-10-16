@@ -18,6 +18,14 @@ export default {
     AgregarUsuario,
     TablaUsuarios,
   },
+  methods: {
+    cargarUsuarios() {
+      this.$store.dispatch("obtenerUsuarios");
+    },
+  },
+  created() {
+    this.cargarUsuarios();
+  },
 };
 </script>
 

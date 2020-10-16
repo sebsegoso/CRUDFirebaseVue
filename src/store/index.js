@@ -24,10 +24,26 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    
+    OBTENER_USUARIOS(state, users) {
+      state.usuarios = users
+    }
   },
   actions: {
-    
+    obtenerUsuarios({ commit }) {
+      firebase
+        .firestore()
+        .collection('usuarios')
+        .onSnapshot(snapshot => {
+          let users = []
+          snapshot.forEach(user => {
+            users.push({
+              id: user.id,
+              data: user.data()
+            })
+          })
+          commit('OBTENER_USUARIOS', users)
+        })
+    }
   },
   modules: {
   }

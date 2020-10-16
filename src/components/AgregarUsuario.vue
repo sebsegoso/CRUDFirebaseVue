@@ -20,7 +20,7 @@
         label="E-mail"
       ></v-text-field>
       <v-btn
-        @click="editarUsuario"
+        
         class="mx-2"
         fab
         dark

@@ -14,8 +14,8 @@ var firebaseConfig = {
   projectId: "demosso-1a57c",
   storageBucket: "demosso-1a57c.appspot.com",
   messagingSenderId: "1006511121632",
-  appId: "1:1006511121632:web:6e8c82b9bbba2765dd9c85",
-  measurementId: "G-EE1WPQF32X"
+  appId: "1:1006511121632:web:be523e2cac09a113dd9c85",
+  measurementId: "G-ZDPX38JSR1"
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
