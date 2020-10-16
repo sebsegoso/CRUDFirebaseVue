@@ -48,6 +48,13 @@ export default new Vuex.Store({
         .firestore()
         .collection('usuarios')
         .add(usuario)
+    },
+    eliminarUsuario({ commit }, id) {
+      firebase
+        .firestore()
+        .collection('usuarios')
+        .doc(id)
+        .delete()
     }
   },
   modules: {

@@ -1,7 +1,6 @@
 <template>
   <div>
-    <div class="lds-dual-ring" v-if="loading"></div>
-    <v-simple-table fixed-header height="300px" v-else>
+    <v-simple-table fixed-header height="300px">
       <template v-slot:default>
         <thead>
           <tr>
@@ -48,9 +47,13 @@ export default {
     return {};
   },
   computed: {
-    ...mapState(["usuarios", "loading"]),
+    ...mapState(["usuarios"]),
   },
-  methods: {},
+  methods: {
+    borrar(id){
+      this.$store.dispatch('eliminarUsuario' , id)
+    }
+  },
 };
 </script>
 
