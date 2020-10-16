@@ -14,7 +14,6 @@ export default new Vuex.Store({
     },
     usuarios: [],
     edit: true,
-    loading: false,
     rules: {
       required: (value) => !!value || "Campo requerido",
       email: (value) => {
@@ -43,6 +42,12 @@ export default new Vuex.Store({
           })
           commit('OBTENER_USUARIOS', users)
         })
+    },
+    agregarUsuario({ commit }, usuario) {
+      firebase
+        .firestore()
+        .collection('usuarios')
+        .add(usuario)
     }
   },
   modules: {

@@ -3,32 +3,23 @@
     <v-app-bar app color="#EEEEEE" light prominent class="py-5">
       <p>Agregar usuario:</p>
       <v-text-field
-        v-model="nombre"
+        v-model="newUser.name"
         :rules="[rules.required]"
         label="Nombre"
       ></v-text-field>
 
       <v-text-field
-        v-model="apellido"
+        v-model="newUser.lastname"
         :rules="[rules.required]"
         label="Apellido"
       ></v-text-field>
 
       <v-text-field
-        v-model="email"
+        v-model="newUser.email"
         :rules="[rules.required, rules.email]"
         label="E-mail"
       ></v-text-field>
-      <v-btn
-        
-        class="mx-2"
-        fab
-        dark
-        color="cyan"
-        v-if="edit"
-      >
-        <v-icon dark> mdi-plus </v-icon> </v-btn
-      ><v-btn @click="agregarUsuario" class="mx-2" fab dark color="cyan" v-else>
+      <v-btn @click="agregarUsuario" class="mx-2" fab dark color="cyan" :disabled="inputNoVacio">
         <v-icon dark> mdi-plus </v-icon>
       </v-btn>
     </v-app-bar>
@@ -42,19 +33,24 @@ export default {
   name: "AgregarUsuario",
   data() {
     return {
-      nombre: "",
-      apellido: "",
-      email: "",
-      loading: false,
+      newUser: {
+        name: "",
+        lastname: "",
+        email: ""
+      },
     };
   },
   methods: {
     agregarUsuario() {
-      console.log('a');
-    }
+      this.$store.dispatch('agregarUsuario' , this.newUser)
+    },
   },
   computed: {
     ...mapState(["usuario", "edit", "rules"]),
+    inputNoVacio(){
+      if (this.newUser.name.trim()  == ''|| this.newUser.lastname.trim()  == ''|| this.newUser.email.trim() == '') return true;
+      else return false;
+    }
   },
 };
 </script>
