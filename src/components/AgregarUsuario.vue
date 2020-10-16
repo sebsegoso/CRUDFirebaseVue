@@ -19,9 +19,16 @@
         :rules="[rules.required, rules.email]"
         label="E-mail"
       ></v-text-field>
-      <v-btn @click="editarUsuario" class="mx-2" fab dark color="cyan" v-if="edit">
-        <v-icon dark> mdi-plus </v-icon>
-      </v-btn><v-btn @click="agregarUsuario" class="mx-2" fab dark color="cyan" v-else>
+      <v-btn
+        @click="editarUsuario"
+        class="mx-2"
+        fab
+        dark
+        color="cyan"
+        v-if="edit"
+      >
+        <v-icon dark> mdi-plus </v-icon> </v-btn
+      ><v-btn @click="agregarUsuario" class="mx-2" fab dark color="cyan" v-else>
         <v-icon dark> mdi-plus </v-icon>
       </v-btn>
     </v-app-bar>
@@ -39,13 +46,6 @@ export default {
       nombre: "",
       apellido: "",
       email: "",
-      rules: {
-        required: (value) => !!value || "Campo requerido",
-        email: (value) => {
-          const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-          return pattern.test(value) || "Correo electrónico inválido";
-        },
-      },
       loading: false,
     };
   },
@@ -59,7 +59,7 @@ export default {
       this.loading = true;
       axios
         .post(
-          `https://us-central1-demosso-1a57c.cloudfunctions.net/usuarios/usuario/`,
+          "https://us-central1-demosso-1a57c.cloudfunctions.net/usuarios/usuario/",
           user,
           { headers: { "Content-type": "application/json" } }
         )
@@ -94,7 +94,7 @@ export default {
     },
   },
   computed: {
-    ...mapState(["usuario", "edit"]),
+    ...mapState(["usuario", "edit", "rules"]),
   },
 };
 </script>

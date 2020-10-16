@@ -1,6 +1,7 @@
 <template>
   <div>
-    <v-simple-table fixed-header height="300px">
+    <div class="lds-dual-ring" v-if="loading"></div>
+    <v-simple-table fixed-header height="300px" v-else>
       <template v-slot:default>
         <thead>
           <tr>
@@ -74,4 +75,5 @@ export default {
 </script>
 
 <style>
+
 </style>
