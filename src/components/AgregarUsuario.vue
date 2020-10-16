@@ -38,7 +38,6 @@
 <script>
 import firebase from "firebase";
 import { mapState, mapMutations } from "vuex";
-import axios from "axios";
 export default {
   name: "AgregarUsuario",
   data() {
@@ -51,47 +50,8 @@ export default {
   },
   methods: {
     agregarUsuario() {
-      let user = {
-        name: this.nombre,
-        lastname: this.apellido,
-        email: this.email,
-      };
-      this.loading = true;
-      axios
-        .post(
-          "https://us-central1-demosso-1a57c.cloudfunctions.net/usuarios/usuario/",
-          user,
-          { headers: { "Content-type": "application/json" } }
-        )
-        .then((res) => {
-          this.$store.dispatch("obtenerUsuarios");
-          this.loading = false;
-        })
-        .catch((rej) => {
-          console.log(rej.message);
-        });
-    },
-    editarUsuario() {
-      let user = {
-        name: this.nombre,
-        lastname: this.apellido,
-        email: this.email,
-      };
-      this.loading = true;
-      axios
-        .put(
-          `https://us-central1-demosso-1a57c.cloudfunctions.net/usuarios/usuario/${this.usuario.id}`,
-          user,
-          { headers: { "Content-type": "application/json" } }
-        )
-        .then((res) => {
-          this.$store.dispatch("obtenerUsuarios");
-          this.loading = false;
-        })
-        .catch((rej) => {
-          console.log(rej.message);
-        });
-    },
+      console.log('a');
+    }
   },
   computed: {
     ...mapState(["usuario", "edit", "rules"]),

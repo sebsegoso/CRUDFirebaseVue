@@ -36,7 +36,6 @@
 <script>
 import firebase from "firebase";
 import { mapState } from "vuex";
-import axios from "axios";
 export default {
   name: "TablaUsuarios",
   data() {
@@ -50,26 +49,8 @@ export default {
   },
   methods: {
     cargarTabla() {
-      this.$store.dispatch("obtenerUsuarios");
+      console.log('a')
     },
-    borrar(id) {
-      axios
-        .delete(
-          `https://us-central1-demosso-1a57c.cloudfunctions.net/usuarios/usuario/${id}`,
-          { headers: { "Content-type": "application/json" } }
-        )
-        .then((res) => {
-          this.cargarTabla();
-        });
-    },
-    editar() {
-      this.$store.state.edit = true;
-      // this.$store.state.usuario = row;
-    },
-    agregar() {
-      this.$store.state.edit = false;
-      this.$store.state.usuario = {}
-    }
   },
 };
 </script>
