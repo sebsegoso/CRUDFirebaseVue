@@ -7,22 +7,13 @@
       <v-card-text>
         <v-text-field
           v-model="user.name"
-          :rules="[rules.required]"
           label="Nombre"
           autofocus
         ></v-text-field>
 
-        <v-text-field
-          v-model="user.lastname"
-          :rules="[rules.required]"
-          label="Apellido"
-        ></v-text-field>
+        <v-text-field v-model="user.lastname" label="Apellido"></v-text-field>
 
-        <v-text-field
-          v-model="user.email"
-          :rules="[rules.required, rules.email]"
-          label="E-mail"
-        ></v-text-field>
+        <v-text-field v-model="user.email" label="E-mail"></v-text-field>
       </v-card-text>
 
       <v-card-actions>
@@ -82,7 +73,7 @@ export default {
     },
   },
   computed: {
-    ...mapState(["usuarioAEditar", "rules"]),
+    ...mapState(["usuarioAEditar"]),
     inputNoVacio() {
       if (
         this.user.name.trim() == "" ||
