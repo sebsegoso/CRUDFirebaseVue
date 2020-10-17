@@ -1,68 +1,101 @@
 <template>
   <v-container>
-    <v-app-bar app color="cyan" light prominent class="py-5">
-      <p>Editar usuario:</p>
-      <v-text-field
-        v-model="newUser.name"
-        :rules="[rules.required]"
-        label="Nombre"
-      ></v-text-field>
+    <!-- <v-row justify="center"> -->
+    <v-card>
+      <v-card-title class="headline"> Editar usuario </v-card-title>
 
-      <v-text-field
-        v-model="newUser.lastname"
-        :rules="[rules.required]"
-        label="Apellido"
-      ></v-text-field>
+      <v-card-text>
+        <v-text-field
+          v-model="user.name"
+          :rules="[rules.required]"
+          label="Nombre"
+          autofocus
+        ></v-text-field>
 
-      <v-text-field
-        v-model="newUser.email"
-        :rules="[rules.required, rules.email]"
-        label="E-mail"
-      ></v-text-field>
-      <v-btn
-        @click="agregarUsuario"
-        class="mx-2"
-        fab
-        dark
-        elevation="2"
-        color="cyan"
-        :disabled="inputNoVacio"
-      >
-        <v-icon dark> mdi-plus </v-icon>
-      </v-btn>
-    </v-app-bar>
+        <v-text-field
+          v-model="user.lastname"
+          :rules="[rules.required]"
+          label="Apellido"
+        ></v-text-field>
+
+        <v-text-field
+          v-model="user.email"
+          :rules="[rules.required, rules.email]"
+          label="E-mail"
+        ></v-text-field>
+      </v-card-text>
+
+      <v-card-actions>
+        <v-spacer></v-spacer>
+
+        <v-btn color="green darken-1" text @click="cerrarModal">
+          Cancelar
+        </v-btn>
+
+        <v-btn
+          class="mx-2"
+          fab
+          dark
+          elevation="2"
+          color="cyan"
+          :disabled="inputNoVacio"
+          @click="actualizarUsuario"
+        >
+          <v-icon dark> mdi-plus </v-icon>
+        </v-btn>
+      </v-card-actions>
+    </v-card>
+    <!-- </v-row> -->
   </v-container>
 </template>
 
 <script>
 import firebase from "firebase";
-import { mapState, mapMutations } from "vuex";
+import { mapState, mapActions } from "vuex";
 export default {
-  name: "AgregarUsuario",
+  name: "EditarUsuario",
+  props: ["usuario"],
   data() {
     return {
-      newUser: {
-        name: "",
-        lastname: "",
-        email: "",
-      },
+      user: {},
     };
   },
+  created() {
+    this.user = this.usuario;
+  },
   methods: {
-    agregarUsuario() {
-      this.$store.dispatch("agregarUsuario", this.newUser);
+    ...mapActions(["editarUsuario"]),
+    cerrarModal() {
+      this.$emit("cerrar");
+    },
+    actualizarUsuario() {
+      let actualizacion = {
+        id: this.user.id,
+        data: {
+          name: this.user.name,
+          lastname: this.user.lastname,
+          email: this.user.email,
+        },
+      };
+      this.editarUsuario(actualizacion);
+      this.$emit("cerrar");
     },
   },
   computed: {
-    ...mapState(["usuario", "edit", "rules"]),
+    ...mapState(["usuarioAEditar", "rules"]),
     inputNoVacio() {
       if (
-        this.newUser.name.trim() == "" ||
-        this.newUser.lastname.trim() == "" ||
-        this.newUser.email.trim() == ""
+        this.user.name.trim() == "" ||
+        this.user.lastname.trim() == "" ||
+        this.user.email.trim() == ""
       )
         return true;
       else return false;
+    },
+    userAEditar() {
+      this.user.name = this.usuarioAEditar.name;
+      this.user.lastname = this.usuarioAEditar.lastname;
+      this.user.email = this.usuarioAEditar.email;
     },
   },
 };

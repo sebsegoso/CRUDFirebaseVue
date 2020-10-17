@@ -1,22 +1,19 @@
 <template>
   <v-container>
-    <v-app-bar app color="#EEEEEE" light prominent class="py-5">
+    <v-app-bar app color="#EEEEEE" light prominent class="py-5 mb-5">
       <p>Agregar usuario:</p>
       <v-text-field
-        v-model="newUser.name"
-        :rules="[rules.required]"
+        v-model="newUser.name"        
         label="Nombre"
       ></v-text-field>
 
       <v-text-field
-        v-model="newUser.lastname"
-        :rules="[rules.required]"
+        v-model="newUser.lastname"        
         label="Apellido"
       ></v-text-field>
 
       <v-text-field
-        v-model="newUser.email"
-        :rules="[rules.required, rules.email]"
+        v-model="newUser.email"        
         label="E-mail"
       ></v-text-field>
       <v-btn
@@ -36,7 +33,6 @@
 
 <script>
 import firebase from "firebase";
-import { mapState, mapMutations } from "vuex";
 export default {
   name: "AgregarUsuario",
   data() {
@@ -57,7 +53,7 @@ export default {
     },
   },
   computed: {
-    ...mapState(["usuario", "edit", "rules"]),
+    
     inputNoVacio() {
       if (
         this.newUser.name.trim() == "" ||

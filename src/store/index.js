@@ -6,12 +6,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    usuario: {
-      name: '',
-      lastname: '',
-      email: '',
-      id: ''
-    },
+    usuarioAEditar: {},
     usuarios: [],
     edit: false,
     rules: {
@@ -56,9 +51,16 @@ export default new Vuex.Store({
         .doc(id)
         .delete()
     },
+    editarUsuario({ commit }, usuario) {
+      firebase
+        .firestore()
+        .collection('usuarios')
+        .doc(usuario.id)
+        .update(usuario.data)
+    }
   },
   getters: {
-    edit (state){
+    edit(state) {
       return state.edit
     }
   }

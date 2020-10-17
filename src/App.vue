@@ -1,30 +1,23 @@
 <template>
   <v-app>
-    <v-main>
-      <EditarUsuario v-if="edit" />
-      <AgregarUsuario v-else />
-      <TablaUsuarios  />
-    </v-main>
+    <AgregarUsuario />
+    <TablaUsuarios />
   </v-app>
 </template>
 
 <script>
 import AgregarUsuario from "./components/AgregarUsuario";
-import EditarUsuario from "./components/EditarUsuario";
 import TablaUsuarios from "./components/TablaUsuarios";
-import {mapState} from 'vuex'
+import { mapState } from "vuex";
 
 export default {
   name: "App",
   data() {
-    return {
-     
-    }
+    return {};
   },
 
   components: {
     AgregarUsuario,
-    EditarUsuario,
     TablaUsuarios,
   },
   methods: {
@@ -36,9 +29,8 @@ export default {
     this.cargarUsuarios();
   },
   computed: {
-    ...mapState(['edit'])
+    ...mapState(["edit"]),
   },
-
 };
 </script>
 
